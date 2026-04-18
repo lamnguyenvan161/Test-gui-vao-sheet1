@@ -4,14 +4,14 @@ import gspread
 from datetime import datetime
 from oauth2client.service_account import ServiceAccountCredentials
 
-SHEET_ID = "1Y31SSWQ18svGk2cdTZzpVFR8kCk2yVPlGDFyVOFrAx4"
+SHEET_ID = "1Y31SSWQ18svGk2cdTZzpVFR8kCk2yVPlGDFyVOFrAx4"  # <-- thay ID sheet
 SHEET_NAME = "Sheet1"
 
 def connect_sheet():
     raw = os.getenv("GOOGLE_CREDENTIALS")
 
     if not raw:
-        raise Exception("❌ Không đọc được GOOGLE_CREDENTIALS")
+        raise Exception("❌ GOOGLE_CREDENTIALS is None (chưa truyền env)")
 
     creds_dict = json.loads(raw)
 
