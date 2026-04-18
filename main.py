@@ -8,7 +8,12 @@ SHEET_ID = "1Y31SSWQ18svGk2cdTZzpVFR8kCk2yVPlGDFyVOFrAx4"
 SHEET_NAME = "Sheet1"
 
 def connect_sheet():
-    creds_dict = json.loads(os.getenv("GOOGLE_CREDENTIALS"))
+    raw = os.getenv("GOOGLE_CREDENTIALS")
+
+    if not raw:
+        raise Exception("❌ Không đọc được GOOGLE_CREDENTIALS")
+
+    creds_dict = json.loads(raw)
 
     scope = [
         "https://spreadsheets.google.com/feeds",
@@ -23,7 +28,7 @@ def connect_sheet():
 def main():
     sheet = connect_sheet()
     sheet.update_acell("A1", "OK " + datetime.now().strftime("%H:%M:%S"))
-    print("DONE")
+    print("✅ DONE")
 
 if __name__ == "__main__":
     main()
